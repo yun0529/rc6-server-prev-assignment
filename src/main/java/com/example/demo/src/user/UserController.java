@@ -7,6 +7,8 @@ import com.example.demo.config.BaseResponse;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 import static com.example.demo.utils.ValidationRegex.isRegexEmail;
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 
 @RestController
 @RequestMapping("/users")
@@ -45,6 +48,7 @@ public class UserController {
      */
     //Query String
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @GetMapping("") // (GET) 127.0.0.1:9000/app/users
     public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) int userIdx) {
         try{
@@ -67,6 +71,7 @@ public class UserController {
      */
     // Path-variable
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @GetMapping("/{userIdx}") // (GET) 127.0.0.1:9000/users/:userIdx
     public BaseResponse<GetUserRes> getUser(@PathVariable("userIdx") int userIdx) {
         // Get Users
@@ -92,6 +97,7 @@ public class UserController {
      */
     // Path-variable
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @GetMapping("/other-chennel/{userIdx}/{otherUserIdx}") // (GET) 127.0.0.1:9000/users/other-chennel/:userIdx/:otherUserIdx
     public BaseResponse<GetOtherUserRes> getOtherUser(@PathVariable("userIdx") int userIdx, @PathVariable("otherUserIdx") int otherUserIdx) {
         // Get Users
@@ -124,6 +130,7 @@ public class UserController {
      */
     // Path-variable
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @GetMapping("/subscribe-channel/{userIdx}") // (GET) 127.0.0.1:9000/users/other-channel/:userIdx/:otherUserIdx
     public BaseResponse<List<GetSubscribeUserRes>> getSubscribeUser(@PathVariable("userIdx") int userIdx) {
         // Get Users
@@ -148,6 +155,7 @@ public class UserController {
      */
     // Body
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PostMapping("")
     public BaseResponse<PostUserRes> createUser(@RequestBody PostUserReq postUserReq) {
         // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
@@ -172,6 +180,7 @@ public class UserController {
      * @return BaseResponse<PostLoginRes>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PostMapping("/logIn")
     public BaseResponse<PostLoginRes> logIn(@RequestBody PostLoginReq postLoginReq){
         try{
@@ -190,6 +199,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/logOut/{userIdx}")
     public BaseResponse<String> modifyUserName(@PathVariable("userIdx") int userIdx){
         try {
@@ -216,6 +226,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/profileImage")
     public BaseResponse<String> modifyUserImageUrl(@RequestBody ModifyUserImageUrl modifyUserImageUrl){
         try {
@@ -241,6 +252,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/backgroundImage")
     public BaseResponse<String> modifyUserBackgroundImageUrl(@RequestBody ModifyUserBackgroundImageUrl modifyUserBackgroundImageUrl){
         try {
@@ -266,6 +278,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/nickname")
     public BaseResponse<String> modifyUserNickname(@RequestBody ModifyUserNickname modifyUserNickname){
         try {
@@ -291,6 +304,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/comment")
     public BaseResponse<String> modifyUserComment(@RequestBody ModifyUserComment modifyUserComment){
         try {
@@ -316,6 +330,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("userSubscribeAccess")
     public BaseResponse<String> modifyUserSubscribeAccess(@RequestBody ModifyUserSubscribeAccess modifyUserSubscribeAccess){
         try {
@@ -341,6 +356,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/userSavePlayListAccess")
     public BaseResponse<String> modifyUserSavePlayListAccess(@RequestBody ModifyUserSavePlayListAccess modifyUserSavePlayListAccess){
         try {
@@ -367,6 +383,7 @@ public class UserController {
      */
     // Body
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PostMapping("/subscribe")
     public BaseResponse<String> subscribeUser(@RequestBody PostSubscribeUserReq postSubscribeUserReq) {
         // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
@@ -390,6 +407,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/subscribe-cancel")
     public BaseResponse<String> modifyUserSubscribe(@RequestBody PostSubscribeUserReq postSubscribeUserReq){
         try {
@@ -416,6 +434,7 @@ public class UserController {
      */
     // Body
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PostMapping("/alarm-set")
     public BaseResponse<String> alarmSet(@RequestBody PostAlarmSetReq postAlarmSetReq) {
         // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
@@ -439,6 +458,7 @@ public class UserController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/alarm-cancel")
     public BaseResponse<String> modifyAlarmSet(@RequestBody PostAlarmSetReq postAlarmSetReq){
         try {

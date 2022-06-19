@@ -8,12 +8,15 @@ import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 import static com.example.demo.utils.ValidationRegex.isRegexEmail;
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
 
 @RestController
 @RequestMapping("/videos")
@@ -43,6 +46,7 @@ public class VideoController {
      */
     //Query String
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @GetMapping("") // (GET) 127.0.0.1:9000/videos
     public BaseResponse<List<GetVideoRes>> getUsers() {
         try{
@@ -60,6 +64,7 @@ public class VideoController {
      */
     // Path-variable
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @GetMapping("/watch/{userIdx}/{videoIdx}") // (GET) 127.0.0.1:9000/videos/watch/:userIdx/:videoIdx
     public BaseResponse<GetVideoWatchRes> getVideoWatch(@PathVariable("userIdx") int userIdx, @PathVariable("videoIdx") int videoIdx) {
         // Get Users
@@ -85,6 +90,7 @@ public class VideoController {
     // Body
     @ResponseBody
     @PostMapping("")
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     public BaseResponse<String> uploadVideo(@RequestBody PostVideoReq postVideoReq) {
         // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
         if(postVideoReq.getVideoTitle() == null){
@@ -131,6 +137,7 @@ public class VideoController {
      */
     // Body
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PostMapping("/like-set")
     public BaseResponse<String> videoLikeSet(@RequestBody PostVideoLikeSetReq postVideoLikeSetReq) {
         // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
@@ -154,6 +161,7 @@ public class VideoController {
      * @return BaseResponse<String>
      */
     @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = READ_COMMITTED , rollbackFor = Exception.class)
     @PatchMapping("/like-cancel")
     public BaseResponse<String> modifyAlarmSet(@RequestBody PostVideoLikeSetReq postVideoLikeSetReq){
         try {
