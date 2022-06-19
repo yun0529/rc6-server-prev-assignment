@@ -154,4 +154,68 @@ public class UserService {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+
+    public void subscribeUser(PostSubscribeUserReq postSubscribeUserReq) throws BaseException {
+        User user = userDao.getUserIdx(postSubscribeUserReq.getUserIdx());
+        if(user.getStatus().equals("Inactive")){
+            throw new BaseException(ACCESS_TO_LOGIN);
+        }
+        try{
+            if(userDao.checkSubscribeLog(postSubscribeUserReq) == 1){
+                userDao.subscribeUserExist(postSubscribeUserReq);
+            }else{
+                userDao.subscribeUser(postSubscribeUserReq);
+            }
+
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void modifyUserSubscribe(PostSubscribeUserReq postSubscribeUserReq) throws BaseException {
+        User user = userDao.getUserIdx(postSubscribeUserReq.getUserIdx());
+        if(user.getStatus().equals("Inactive")){
+            throw new BaseException(ACCESS_TO_LOGIN);
+        }
+        try{
+            int result = userDao.modifySubscribeUser(postSubscribeUserReq);
+            if(result == 0){
+                throw new BaseException(MODIFY_FAIL_USER_SAVE_PLAYLIST_ACCESS);
+            }
+        } catch(Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void alarmSet(PostAlarmSetReq postAlarmSetReq) throws BaseException {
+        User user = userDao.getUserIdx(postAlarmSetReq.getUserIdx());
+        if(user.getStatus().equals("Inactive")){
+            throw new BaseException(ACCESS_TO_LOGIN);
+        }
+        try{
+            if(userDao.checkAlarmSetLog(postAlarmSetReq) == 1){
+                userDao.alarmSetExist(postAlarmSetReq);
+            }else{
+                userDao.alarmSet(postAlarmSetReq);
+            }
+
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public void modifyAlarmSet(PostAlarmSetReq postAlarmSetReq) throws BaseException {
+        User user = userDao.getUserIdx(postAlarmSetReq.getUserIdx());
+        if(user.getStatus().equals("Inactive")){
+            throw new BaseException(ACCESS_TO_LOGIN);
+        }
+        try{
+            int result = userDao.modifyAlarmSet(postAlarmSetReq);
+            if(result == 0){
+                throw new BaseException(MODIFY_FAIL_USER_SAVE_PLAYLIST_ACCESS);
+            }
+        } catch(Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 }

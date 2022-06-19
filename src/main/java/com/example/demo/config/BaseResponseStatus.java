@@ -30,7 +30,8 @@ public enum BaseResponseStatus {
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
 
-
+    // [POST] /videos
+    POST_VIDEOS_EMPTY_TITLE(false, 2100, "동영상 타이틀을 입력해주세요."),
 
     /**
      * 3000 : Response 오류
@@ -72,7 +73,11 @@ public enum BaseResponseStatus {
 
     MODIFY_FAIL_USER_SAVE_PLAYLIST_ACCESS(false,4020,"채널 재생목록 공개 여부 수정 실패"),
 
-    ACCESS_TO_LOGIN(false,4021,"로그인을 해주세요.");
+    ACCESS_TO_LOGIN(false,4021,"로그인을 해주세요."),
+
+    MODIFY_FAIL_VIDEO(false,4022,"동영상 수정 실패"),
+
+    MODIFY_FAIL_VIDEO_LIKE(false,4023,"동영상 좋아요 수정 실패");
     // 5000 : 필요시 만들어서 쓰세요
     // 6000 : 필요시 만들어서 쓰세요
 

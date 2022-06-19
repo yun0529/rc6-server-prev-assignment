@@ -6,22 +6,36 @@ com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
+com/example/demo/src/user/model/PostAlarmSetReq.java
+ com.example.demo.src.user.model.PostAlarmSetReq
 com/example/demo/utils/ValidationRegex.java
  com.example.demo.utils.ValidationRegex
 com/example/demo/src/user/model/PostLoginRes.java
  com.example.demo.src.user.model.PostLoginRes
+com/example/demo/src/Video/model/ModifyVideos.java
+ com.example.demo.src.Video.model.ModifyVideos
 com/example/demo/src/user/UserDao.java
  com.example.demo.src.user.UserDao
 com/example/demo/config/BaseResponseStatus.java
  com.example.demo.config.BaseResponseStatus
 com/example/demo/src/user/model/PatchUserReq.java
  com.example.demo.src.user.model.PatchUserReq
+com/example/demo/src/Video/VideoService.java
+ com.example.demo.src.Video.VideoService
+com/example/demo/src/Video/model/GetVideoRes.java
+ com.example.demo.src.Video.model.GetVideoRes
+com/example/demo/src/Video/model/PostVideoLikeSetReq.java
+ com.example.demo.src.Video.model.PostVideoLikeSetReq
 com/example/demo/src/user/model/ModifyUserNickname.java
  com.example.demo.src.user.model.ModifyUserNickname
 com/example/demo/src/WebSecurityConfig.java
  com.example.demo.src.WebSecurityConfig
 com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
+com/example/demo/src/Video/model/GetVideoWatchRes.java
+ com.example.demo.src.Video.model.GetVideoWatchRes
+com/example/demo/src/user/model/GetOtherUserRes.java
+ com.example.demo.src.user.model.GetOtherUserRes
 com/example/demo/src/user/model/PostLoginReq.java
  com.example.demo.src.user.model.PostLoginReq
 com/example/demo/src/user/model/ModifyUserImageUrl.java
@@ -38,12 +52,20 @@ com/example/demo/src/user/UserController.java
  com.example.demo.src.user.UserController
 com/example/demo/config/BaseResponse.java
  com.example.demo.config.BaseResponse
+com/example/demo/src/user/model/PostSubscribeUserReq.java
+ com.example.demo.src.user.model.PostSubscribeUserReq
 com/example/demo/src/user/model/ModifyUserComment.java
  com.example.demo.src.user.model.ModifyUserComment
 com/example/demo/src/user/model/User.java
  com.example.demo.src.user.model.User
+com/example/demo/src/Video/VideoProvider.java
+ com.example.demo.src.Video.VideoProvider
+com/example/demo/src/user/model/GetSubscribeUserRes.java
+ com.example.demo.src.user.model.GetSubscribeUserRes
 com/example/demo/src/user/UserService.java
  com.example.demo.src.user.UserService
+com/example/demo/src/Video/VideoController.java
+ com.example.demo.src.Video.VideoController
 com/example/demo/src/user/model/GetUserRes.java
  com.example.demo.src.user.model.GetUserRes
 com/example/demo/config/BaseException.java
@@ -54,3 +76,7 @@ com/example/demo/utils/JwtService.java
  com.example.demo.utils.JwtService
 com/example/demo/src/user/UserProvider.java
  com.example.demo.src.user.UserProvider
+com/example/demo/src/Video/model/PostVideoReq.java
+ com.example.demo.src.Video.model.PostVideoReq
+com/example/demo/src/Video/VideoDao.java
+ com.example.demo.src.Video.VideoDao

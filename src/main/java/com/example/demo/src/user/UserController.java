@@ -85,6 +85,63 @@ public class UserController {
     }
 
     /**
+     * 다른 유저 채널 조회 API
+     * [GET] /users/other-chennel/:userIdx
+     * @return BaseResponse<GetUserRes>
+     * JWT 없어도 되는 API
+     */
+    // Path-variable
+    @ResponseBody
+    @GetMapping("/other-chennel/{userIdx}/{otherUserIdx}") // (GET) 127.0.0.1:9000/users/other-chennel/:userIdx/:otherUserIdx
+    public BaseResponse<GetOtherUserRes> getOtherUser(@PathVariable("userIdx") int userIdx, @PathVariable("otherUserIdx") int otherUserIdx) {
+        // Get Users
+        try{
+            GetOtherUserRes getOtherUserRes = null;
+            if(jwtService.getJwt().equals("")){
+                //비회원용
+                getOtherUserRes = userProvider.getOtherUser(otherUserIdx);
+            }else{
+                //회원용
+                getOtherUserRes = userProvider.getOtherUser(userIdx,otherUserIdx);
+                int userIdxByJwt = jwtService.getUserIdx();
+                //userIdx와 접근한 유저가 같은지 확인
+                if(userIdx != userIdxByJwt){
+                    return new BaseResponse<>(INVALID_USER_JWT);
+                }
+            }
+
+            return new BaseResponse<>(getOtherUserRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+
+    }
+
+    /**
+     * 구독한 채널 조회 API
+     * [GET] /users/other-channel/:userIdx
+     * @return BaseResponse<List<GetSubscribeUserRes>>
+     */
+    // Path-variable
+    @ResponseBody
+    @GetMapping("/subscribe-channel/{userIdx}") // (GET) 127.0.0.1:9000/users/other-channel/:userIdx/:otherUserIdx
+    public BaseResponse<List<GetSubscribeUserRes>> getSubscribeUser(@PathVariable("userIdx") int userIdx) {
+        // Get Users
+        try{
+            List<GetSubscribeUserRes> getOtherUserRes = userProvider.getSubscribeUser(userIdx);
+                int userIdxByJwt = jwtService.getUserIdx();
+                //userIdx와 접근한 유저가 같은지 확인
+                if(userIdx != userIdxByJwt){
+                    return new BaseResponse<>(INVALID_USER_JWT);
+                }
+            return new BaseResponse<>(getOtherUserRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+
+    }
+
+    /**
      * 회원가입 API
      * [POST] /users
      * @return BaseResponse<PostUserRes>
@@ -108,6 +165,7 @@ public class UserController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
     /**
      * 로그인 API
      * [POST] /users/logIn
@@ -302,4 +360,101 @@ public class UserController {
         }
     }
 
+    /**
+     * 구독하기 API
+     * [POST] /users/subscribe
+     * @return BaseResponse<String>
+     */
+    // Body
+    @ResponseBody
+    @PostMapping("/subscribe")
+    public BaseResponse<String> subscribeUser(@RequestBody PostSubscribeUserReq postSubscribeUserReq) {
+        // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
+        try{
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(postSubscribeUserReq.getUserIdx() != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+            userService.subscribeUser(postSubscribeUserReq);
+            return new BaseResponse<>("");
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    /**
+     * 구독 취소 API
+     * [PATCH] /users/subscribe-cancel
+     * @return BaseResponse<String>
+     */
+    @ResponseBody
+    @PatchMapping("/subscribe-cancel")
+    public BaseResponse<String> modifyUserSubscribe(@RequestBody PostSubscribeUserReq postSubscribeUserReq){
+        try {
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(postSubscribeUserReq.getUserIdx() != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+
+            userService.modifyUserSubscribe(postSubscribeUserReq);
+
+            String result = "";
+            return new BaseResponse<>(result);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    /**
+     * 알림 설정 API
+     * [POST] /users/alarm-set
+     * @return BaseResponse<String>
+     */
+    // Body
+    @ResponseBody
+    @PostMapping("/alarm-set")
+    public BaseResponse<String> alarmSet(@RequestBody PostAlarmSetReq postAlarmSetReq) {
+        // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
+        try{
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(postAlarmSetReq.getUserIdx() != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+            userService.alarmSet(postAlarmSetReq);
+            return new BaseResponse<>("");
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    /**
+     * 알림설정 해제 API
+     * [PATCH] /users/alarm-cancel
+     * @return BaseResponse<String>
+     */
+    @ResponseBody
+    @PatchMapping("/alarm-cancel")
+    public BaseResponse<String> modifyAlarmSet(@RequestBody PostAlarmSetReq postAlarmSetReq){
+        try {
+            //jwt에서 idx 추출.
+            int userIdxByJwt = jwtService.getUserIdx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(postAlarmSetReq.getUserIdx() != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+
+            userService.modifyAlarmSet(postAlarmSetReq);
+
+            String result = "";
+            return new BaseResponse<>(result);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
 }

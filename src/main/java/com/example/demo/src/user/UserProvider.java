@@ -60,6 +60,32 @@ public class UserProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+    public GetOtherUserRes getOtherUser(int otherUserIdx) throws BaseException {
+        try {
+            GetOtherUserRes getOtherUserRes = userDao.getOtherUser(otherUserIdx);
+            return getOtherUserRes;
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+    public GetOtherUserRes getOtherUser(int userIdx, int otherUserIdx) throws BaseException {
+        try {
+            GetOtherUserRes getOtherUserRes = userDao.getOtherUser(userIdx, otherUserIdx);
+            return getOtherUserRes;
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+    public List<GetSubscribeUserRes> getSubscribeUser(int userIdx) throws BaseException {
+        try {
+            List<GetSubscribeUserRes> GetSubscribeUserRes = userDao.getSubscribeUser(userIdx);
+            return GetSubscribeUserRes;
+        } catch (Exception exception) {
+            System.out.println(exception);
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 
     public int checkEmail(String userAccount) throws BaseException{
         try{
@@ -68,6 +94,8 @@ public class UserProvider {
             throw new BaseException(DATABASE_ERROR);
         }
     }
+
+
 
     public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException{
         User user = userDao.getPwd(postLoginReq);
