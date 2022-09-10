@@ -22,10 +22,14 @@ com/example/demo/src/user/model/PatchUserReq.java
  com.example.demo.src.user.model.PatchUserReq
 com/example/demo/src/Video/VideoService.java
  com.example.demo.src.Video.VideoService
+com/example/demo/src/house/HouseProvider.java
+ com.example.demo.src.house.HouseProvider
 com/example/demo/src/Video/model/GetVideoRes.java
  com.example.demo.src.Video.model.GetVideoRes
 com/example/demo/src/Video/model/PostVideoLikeSetReq.java
  com.example.demo.src.Video.model.PostVideoLikeSetReq
+com/example/demo/src/house/model/GetDetailContent.java
+ com.example.demo.src.house.model.GetDetailContent
 com/example/demo/src/user/model/ModifyUserNickname.java
  com.example.demo.src.user.model.ModifyUserNickname
 com/example/demo/src/WebSecurityConfig.java
@@ -34,10 +38,10 @@ com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
 com/example/demo/src/Video/model/GetVideoWatchRes.java
  com.example.demo.src.Video.model.GetVideoWatchRes
-com/example/demo/src/user/model/GetOtherUserRes.java
- com.example.demo.src.user.model.GetOtherUserRes
 com/example/demo/src/user/model/PostLoginReq.java
  com.example.demo.src.user.model.PostLoginReq
+com/example/demo/src/user/model/GetOtherUserRes.java
+ com.example.demo.src.user.model.GetOtherUserRes
 com/example/demo/src/user/model/ModifyUserImageUrl.java
  com.example.demo.src.user.model.ModifyUserImageUrl
 com/example/demo/src/user/model/ModifyUserSavePlayListAccess.java
@@ -46,6 +50,12 @@ com/example/demo/src/user/model/ModifyUserSubscribeAccess.java
  com.example.demo.src.user.model.ModifyUserSubscribeAccess
 com/example/demo/config/secret/Secret.java
  com.example.demo.config.secret.Secret
+com/example/demo/src/house/model/PostRoomContentReq.java
+ com.example.demo.src.house.model.PostRoomContentReq
+com/example/demo/src/house/HouseController.java
+ com.example.demo.src.house.HouseController
+com/example/demo/src/house/model/PatchContentCount.java
+ com.example.demo.src.house.model.PatchContentCount
 com/example/demo/src/user/model/PostUserRes.java
  com.example.demo.src.user.model.PostUserRes
 com/example/demo/src/user/UserController.java
@@ -54,18 +64,22 @@ com/example/demo/config/BaseResponse.java
  com.example.demo.config.BaseResponse
 com/example/demo/src/user/model/PostSubscribeUserReq.java
  com.example.demo.src.user.model.PostSubscribeUserReq
-com/example/demo/src/user/model/ModifyUserComment.java
- com.example.demo.src.user.model.ModifyUserComment
 com/example/demo/src/user/model/User.java
  com.example.demo.src.user.model.User
+com/example/demo/src/user/model/ModifyUserComment.java
+ com.example.demo.src.user.model.ModifyUserComment
 com/example/demo/src/Video/VideoProvider.java
  com.example.demo.src.Video.VideoProvider
+com/example/demo/src/house/HouseService.java
+ com.example.demo.src.house.HouseService
 com/example/demo/src/user/model/GetSubscribeUserRes.java
  com.example.demo.src.user.model.GetSubscribeUserRes
 com/example/demo/src/user/UserService.java
  com.example.demo.src.user.UserService
 com/example/demo/src/Video/VideoController.java
  com.example.demo.src.Video.VideoController
+com/example/demo/src/house/HouseDao.java
+ com.example.demo.src.house.HouseDao
 com/example/demo/src/user/model/GetUserRes.java
  com.example.demo.src.user.model.GetUserRes
 com/example/demo/config/BaseException.java
